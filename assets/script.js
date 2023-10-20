@@ -17,30 +17,47 @@ const slides = [
     tagLine: "Autocollants <span>avec découpe laser sur mesure</span>",
   },
 ];
+// Initialisation de l'indice de la diapositive actuelle
 
 let currentIndex = 0;
+// Sélection des éléments DOM nécessaires
 
-const bannerImg = document.querySelector(".banner-img");
-const arrowLeft = document.querySelector(".arrow_left");
-const arrowRight = document.querySelector(".arrow_right");
-const dots = document.querySelectorAll(".dot");
+const bannerImg = document.querySelector(".banner-img"); // Sélection de l'image du carrousel
+const arrowLeft = document.querySelector(".arrow_left"); // Sélection du bouton gauche
+const arrowRight = document.querySelector(".arrow_right"); // Sélection du bouton droit
+const dots = document.querySelectorAll(".dot"); // Sélectionnez tous les points indicateurs
+
+// Fonction pour mettre à jour les indicateurs de point
 
 function updateDots(indexSelected) {
   dots.forEach((dot, indexDot) => {
     if (indexDot === indexSelected) {
-      dot.classList.add("dot_selected");
+      dot.classList.add("dot_selected"); // Ajoute la classe pour indiquer la diapositive actuelle
     } else {
-      dot.classList.remove("dot_selected");
+      dot.classList.remove("dot_selected"); // Retire la classe pour les autres diapositives
     }
   });
 }
 
+// Fonction pour mettre à jour le carrousel
+
 function updateCarousel(indexSelected, direction) {
+  // Gestion du rebouclage au début ou à la fin du carrousel
+
   if (indexSelected === -1 && direction === "left") {
     currentIndex = slides.length - 1;
   } else if (indexSelected === slides.length && direction === "right") {
     currentIndex = 0;
   }
+
+  // Si l'index de la diapositive actuelle (currentIndex) est -1 (ce qui signifie que vous êtes au début de la liste)
+  // et que la direction est vers la gauche (c'est-à-dire que vous avez cliqué sur la flèche gauche),
+  // alors le code déplace l'indice currentIndex à la fin de la liste (slides.length - 1).
+
+  // // De même, si l'index de la diapositive actuelle est égal à la longueur totale de la liste de diapositives (slides.length)
+  // et que la direction est vers la droite (c'est-à-dire que vous avez cliqué sur la flèche droite), le code réinitialise l'indice currentIndex à 0 (le début de la liste).
+
+  // Mise à jour de l'image, du texte alternatif et de la ligne de tag
 
   const imagePath = `assets/images/slideshow/${slides[currentIndex].image}`;
   bannerImg.src = imagePath;
@@ -48,6 +65,19 @@ function updateCarousel(indexSelected, direction) {
 
   const tagLine = slides[currentIndex].tagLine;
   document.querySelector("p").innerHTML = tagLine;
+
+  //const imagePath = assets/images/slideshow/${slides[currentIndex].image};: Crée le chemin de l'image de
+  //la diapositive actuelle.
+
+  //bannerImg.src = imagePath;: Met à jour l'image du carrousel avec le chemin de l'image actuelle.
+
+  //bannerImg.alt = Slide ${currentIndex + 1};: Définit un texte alternatif pour l'image du carrousel,
+
+  //indiquant le numéro de la diapositive.
+
+  //const tagLine = slides[currentIndex].tagLine;: Récupère la ligne de tag de la diapositive actuelle.
+
+  //document.querySelector('p').innerHTML = tagLine;: Met à jour le texte de la diapositive avec la ligne
 }
 
 // Écouteur d'événement pour le bouton de gauche
