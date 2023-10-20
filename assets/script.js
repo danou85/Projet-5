@@ -18,14 +18,15 @@ const slides = [
   },
 ];
 
-// Initialisation de l'indice de la diapositive actuelle
 let currentIndex = 0;
 
-// Sélection des éléments DOM nécessaires
-const bannerImg = document.querySelector(".banner-img"); // Sélection de l'image du carrousel
-const arrowLeft = document.querySelector(".arrow_left"); // Sélection du bouton gauche
-const arrowRight = document.querySelector(".arrow_right"); // Sélection du bouton droit
-const dots = document.querySelectorAll(".dot"); // Sélectionnez tous les points indicateurs
+const bannerImg = document.querySelector(".banner-img")
+const arrowLeft = document.querySelector(".arrow_left")
+const arrowRight = document.querySelector(".arrow_right")
+const dots = document.querySelector(".dot")
+
+
+
 
 function updateDots(indexSelected) {
   dots.forEach((dot, indexDot) => {
@@ -38,11 +39,16 @@ function updateDots(indexSelected) {
 }
 
 function updateCarousel(indexSelected, direction) {
-  if (indexSelected === -1 && direction === "left") {
-    currentIndex = slides.length - 1;
-  } else if (indexSelected === slides.length && direction === "right") {
+  if (indexSelected === -1  && direction === "left"){
+    currentIndex = slides.length -1;
+  }
+  else if (indexSelected === slides.length && direction === "right"){
     currentIndex = 0;
   }
+  const imagePath = 'assets/images/slideshow/${slides[curentIndex].image}';
+  bannerImg.src = imagePath;
+  bannerImg.alt = 'slide ${currentIndex + 1 }';
+
   
   const imagePath = `assets/images/slideshow/${slides[currentIndex].image}`;
   bannerImg.src = imagePath;
@@ -53,19 +59,26 @@ function updateCarousel(indexSelected, direction) {
 }
 
 // Écouteur d'événement pour le bouton de gauche
-arrowLeft.addEventListener('click', () => {
+
+
+arrowLeft.addEventListener ('click',() =>{
   currentIndex -= 1;
-  updateCarousel(currentIndex, 'left'); // Appelle la fonction de mise à jour pour la diapositive précédente
-  updateDots(currentIndex); // Met à jour les indicateurs de point
+  updateCarousel(currentIndex, 'left');// Appelle la fonction de mise à jour pour la diapositive précédente
+  updateDots(currentIndex);// Met à jour les indicateurs de point
 });
 
+
 // Écouteur d'événement pour le bouton de droite
-arrowRight.addEventListener('click', () => {
+
+
+arrowRight.addEventListener ('click',() =>{
   currentIndex += 1;
   updateCarousel(currentIndex, 'right'); // Appelle la fonction de mise à jour pour la diapositive suivante
   updateDots(currentIndex); // Met à jour les indicateurs de point
 });
 
+
 // Initialisation du carrousel et des indicateurs de point lors du démarrage
 updateCarousel(currentIndex, 'démarrage');
 updateDots(currentIndex);
+
