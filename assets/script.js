@@ -23,7 +23,7 @@ let currentIndex = 0;
 const bannerImg = document.querySelector(".banner-img")
 const arrowLeft = document.querySelector(".arrow_left")
 const arrowRight = document.querySelector(".arrow_right")
-const dots = document.querySelector(".dot")
+const dots = document.querySelectorAll(".dot")
 
 
 
@@ -45,10 +45,6 @@ function updateCarousel(indexSelected, direction) {
   else if (indexSelected === slides.length && direction === "right"){
     currentIndex = 0;
   }
-  const imagePath = 'assets/images/slideshow/${slides[curentIndex].image}';
-  bannerImg.src = imagePath;
-  bannerImg.alt = 'slide ${currentIndex + 1 }';
-
   
   const imagePath = `assets/images/slideshow/${slides[currentIndex].image}`;
   bannerImg.src = imagePath;
